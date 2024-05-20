@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="M_Hike_hk3971t_gre.ac.uk.Views.AddUpdateHikeDetail"
+             Title="Add / Update Hike Details">
+    <ContentPage.Resources>
+        <!-- ResourceDictionary for styling -->
+        <ResourceDictionary>
+            <!-- Style for labels -->
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="SlateGray" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <!-- StackLayout to organize UI elements vertically with margins and spacing -->
+        <StackLayout Margin="10" Spacing="15">
+            <!-- VerticalStackLayout for each data entry field with corresponding label and input control -->
+            <VerticalStackLayout>
+                <Label Text="Name *" />
+                <Entry Text="{Binding HikeDetail.HikeName, Mode=TwoWay}" Placeholder="" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout>
+                <Label Text="Location *" />
+                <Entry Text="{Binding HikeDetail.HikeLocation, Mode=TwoWay}" Placeholder="" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout>
+                <Label Text="Date *" />
+                <DatePicker Date="{Binding HikeDetail.HikeDate, Mode=TwoWay}" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout>
+                <Label Text="Is parking Available? (Yes/No) *" />
+                <Picker SelectedItem="{Binding HikeDetail.HikeParkingAvailable, Mode=TwoWay}">
+                    <Picker.ItemsSource>
+                        <!-- Providing options for the Picker control -->
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Yes</x:String>
+                            <x:String>No</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout>
+                <Label Text="Length of Hike *" />
+                <Entry Text="{Binding HikeDetail.HikeLength, Mode=TwoWay}" Placeholder="" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout>
+                <Label Text="Level of Difficulty *" />
+                <Picker SelectedItem="{Binding HikeDetail.HikeDifficulty, Mode=TwoWay}">
+                    <Picker.ItemsSource>
+                        <!-- Providing options for the Picker control -->
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Easy</x:String>
+                            <x:String>Moderate</x:String>
+                            <x:String>Difficult</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout>
+                <Label Text="Description *" />
+                <Entry Text="{Binding HikeDetail.HikeDescription, Mode=TwoWay}" Placeholder="" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout>
+                <Label Text="Special Requirements" />
+                <Entry Text="{Binding HikeDetail.HikeSpecialRequirements, Mode=TwoWay}" Placeholder="" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout>
+                <Label Text="Recommended Gear" />
+                <Entry Text="{Binding HikeDetail.HikeRecommendedGear, Mode=TwoWay}" Placeholder="" />
+            </VerticalStackLayout>
+
+            <!-- Button for saving data with binding to command and isEnabled property -->
+            <Button Text="Save" Command="{Binding AddUpdateHikeCommand}" IsEnabled="{Binding IsSaveButtonEnabled}" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

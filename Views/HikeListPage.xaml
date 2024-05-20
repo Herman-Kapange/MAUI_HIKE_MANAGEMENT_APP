@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:M_Hike_hk3971t_gre.ac.uk.Models"
+             xmlns:viewModels="clr-namespace:M_Hike_hk3971t_gre.ac.uk.ViewModels"
+             x:DataType="viewModels:HikeListPageViewModel"
+             x:Class="M_Hike_hk3971t_gre.ac.uk.Views.HikeListPage"
+             Title="M-Hike">
+    <!-- StackLayout to organize UI elements with a margin -->
+    <StackLayout Margin="10">
+        <!-- Button to add a new hike, bound to the AddUpdateHikeCommand in the ViewModel -->
+        <Button Text="Add Hike" Command="{Binding AddUpdateHikeCommand}" HorizontalOptions="EndAndExpand" />
+
+        <!-- CollectionView to display a list of hikes, bound to the Hikes property in the ViewModel -->
+        <CollectionView ItemsSource="{Binding Hikes}">
+            <!-- DataTemplate for each item in the CollectionView, using HikeModel as the data type -->
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:HikeModel">
+                    <!-- SwipeView for swipe actions -->
+                    <SwipeView>
+                        <!-- LeftItems for swipe actions on the left side -->
+                        <SwipeView.LeftItems>
+                            <SwipeItems>
+                                <!-- SwipeItemView for "Edit" action -->
+                                <SwipeItemView>
+                                    <VerticalStackLayout  BackgroundColor="LightBlue">
+                                        <Label Text="Edit" 
+                                               HorizontalTextAlignment="Center" 
+                                               VerticalTextAlignment="Center" 
+                                               FontAttributes="Bold" TextColor="White" />
+                                    </VerticalStackLayout>
+                                </SwipeItemView>
+                                <!-- SwipeItemView for "Delete" action -->
+                                <SwipeItemView>
+                                    <VerticalStackLayout BackgroundColor="Red">
+                                        <Label Text="Delete" 
+                                               VerticalTextAlignment="Center" 
+                                               HorizontalTextAlignment="Center" 
+                                               FontAttributes="Bold" TextColor="White" />
+                                    </VerticalStackLayout>
+                                </SwipeItemView>
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+                        <!-- Frame for displaying hike details -->
+                        <Frame Margin="10" Padding="10">
+                            <!-- VerticalStackLayout for organizing labels vertically -->
+                            <VerticalStackLayout>
+                                <!-- HorizontalStackLayout for organizing two labels horizontally -->
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="{Binding HikeName}" FontSize="18" FontAttributes="Bold" />
+                                    <Label Text="{Binding HikeLocation}" FontSize="18" FontAttributes="Bold" />
+                                </HorizontalStackLayout>
+                                <!-- Label for displaying hike date -->
+                                <Label Text="{Binding HikeDate}" />
+                            </VerticalStackLayout>
+                            <!-- GestureRecognizer for handling tap gesture on the Frame -->
+                            <Frame.GestureRecognizers>
+                                <!-- TapGestureRecognizer bound to the DisplayActionCommand in the ViewModel -->
+                                <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewModels:HikeListPageViewModel}},Path=DisplayActionCommand}"
+                                                      CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>
